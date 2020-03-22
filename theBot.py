@@ -39,7 +39,7 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    logChannel = bot.get_channel(681216619955224583)
+    logChannel = bot.get_channel(691104272066150480)
     messagecontent = message.content
     currentchannel = bot.get_channel(message.channel.id)
     if message.guild is None:
