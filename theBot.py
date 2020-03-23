@@ -10,7 +10,8 @@ import CalculateLib
 import logging
 from discord.ext import tasks
 from collections import defaultdict, deque
-
+from image_gen import generate_image
+from PIL import Image, ImageDraw
 
 
 adminlist =[525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
@@ -419,6 +420,11 @@ async def netBuild(ctx):
             connections[i] = dict(connections[i])
         print(connections)
         await ctx.author.send(dict(connections))
+        im = generate_image(connections)
+        name = randomString(10)
+        im.save(name + '.jpg')
+        with open(name + '.jpg', 'rb') as f:
+            await ctx.send(file = discord.File(f))
     except EOFError:
         await ctx.send("idk")
 
