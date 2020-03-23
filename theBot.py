@@ -446,6 +446,6 @@ async def botStatusLoop(ctx):
         await bot.change_presence(status=discord.Status.online, activity = game)
 
 token = os.environ.get('BOT_TOKEN')
-bot.run(token)
-bot.close()
+#bot.run(token)
+#bot.close()
 
