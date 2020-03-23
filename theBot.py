@@ -425,6 +425,8 @@ async def netBuild(ctx):
         im.save(name + '.jpg')
         with open(name + '.jpg', 'rb') as f:
             await ctx.send(file = discord.File(f))
+        os.remove(name + '.jpg')
+        await ctx.send('Test')
     except EOFError:
         await ctx.send("idk")
 
