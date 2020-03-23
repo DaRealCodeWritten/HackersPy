@@ -447,4 +447,5 @@ async def botStatusLoop(ctx):
 
 token = os.environ.get('BOT_TOKEN')
 bot.run(token)
+bot.close()
 
