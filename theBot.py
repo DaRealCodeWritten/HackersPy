@@ -13,6 +13,7 @@ from collections import defaultdict, deque
 from image_gen import generate_image
 from PIL import Image, ImageDraw
 import string
+from io import BytesIO
 import random
 
 adminlist =[525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
@@ -426,11 +427,10 @@ async def netBuild(ctx):
         await ctx.author.send(dict(connections))
         name = randomString(10)
         im = generate_image(connections)
-        filedir = os.path.join(os.getcwd(), name + '.jpg')
-        im.save(filedir)
-        with open(filedir, 'rb') as f:
-            await ctx.send(file = discord.File(f))
-        os.remove(filedir)
+        with BytesIO() as image_binary:
+            im.save(image_binary, 'PNG')
+            image_binary.seek(0)
+            await ctx.channel.send(file=discord.File(fp=image_binary, filename='image.png'))
     except EOFError:
         await ctx.send("idk")
 
