@@ -424,6 +424,7 @@ async def netBuild(ctx):
             connections[i] = dict(connections[i])
         print(connections)
         await ctx.author.send(dict(connections))
+        name = randomString(10)
         im = generate_image(connections)
         filedir = os.path.join(os.getcwd(), name + '.jpg')
         im.save(filedir)
