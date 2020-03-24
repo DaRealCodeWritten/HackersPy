@@ -10,8 +10,10 @@ import CalculateLib
 import logging
 from discord.ext import tasks
 from collections import defaultdict, deque
-
-
+from image_gen import generate_image
+from PIL import Image, ImageDraw
+import string
+import random
 
 adminlist =[525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
 
@@ -381,7 +383,10 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
     
-        
+def randomString(stringLength=10):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
+
 @bot.command(description = "in progress", hidden = True)
 async def netBuild(ctx):
     author = ctx.author.id
@@ -410,15 +415,22 @@ async def netBuild(ctx):
                 break
             msgContent = (msg.content).split()
             for b in range(0,len(msgContent)):
-                connections[msgContent[i]][curNode] = True
-                connections[curNode][msgContent[i]] = True
-                if msgContent[i] not in nodeList: queue.append(msgContent[i])
-                nodeList.add(msgContent[i])
+                connections[msgContent[b]][curNode] = True
+                connections[curNode][msgContent[b]] = True
+                if msgContent[b] not in nodeList: queue.append(msgContent[b])
+                nodeList.add(msgContent[b])
         connections = dict(connections)
         for i in connections:
             connections[i] = dict(connections[i])
         print(connections)
         await ctx.author.send(dict(connections))
+        im = generate_image(connections)
+        name = randomString(10)
+        im.save(name + '.jpg')
+        with open(name + '.jpg', 'rb') as f:
+            await ctx.send(file = discord.File(f))
+        os.remove(name + '.jpg')
+        await ctx.send('Test')
     except EOFError:
         await ctx.send("idk")
 
@@ -447,4 +459,5 @@ async def botStatusLoop(ctx):
 
 token = os.environ.get('BOT_TOKEN')
 bot.run(token)
+#bot.close()
 
