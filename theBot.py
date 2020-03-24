@@ -388,6 +388,10 @@ def randomString(stringLength=10):
     letters = string.ascii_lowercase
     return ''.join(random.choice(letters) for i in range(stringLength))
 
+@bot.command()
+async def asdfgh(ctx):
+    await ctx.send("boomer")
+
 @bot.command(description = "in progress", hidden = True)
 async def netBuild(ctx):
     author = ctx.author.id
