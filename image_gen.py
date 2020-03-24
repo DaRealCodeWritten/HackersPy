@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 import math
 from collections import deque
+import os
 
 def get_point(point, dist, f):
     # x^2 + y^2 = dist^2
@@ -66,7 +67,7 @@ def generate_image(connections):
                 angle[i] = actualangle
                 draw.ellipse(ellipse(position[i]), fill = 'blue', outline = 'blue')
                 draw.line([position[i], position[curNode]], fill = 5, width = 5, joint = None)
-    font = ImageFont.truetype("arial.ttf", 72)
+    font = ImageFont.truetype(os.path.join(os.getcwd(), "arial.ttf"), 72)
     for i in position:
         draw.text(position[i], i, fill=(31,117,254), font = font)
     return img
