@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 import math
 from collections import deque
 
@@ -24,25 +24,26 @@ def ellipse(point):
     return (point[0] - 20, point[1] - 20, point[0] + 20, point[1] + 20)
 
 def generate_image(connections):
-    img = Image.new('RGB', (5000, 5000), (255, 255, 255))
+    img = Image.new('RGB', (2000, 2000), (255, 255, 255))
     print(img.format, img.size, img.mode)
     draw = ImageDraw.Draw(img)
+    position = { 'netCon': (1005, 1005) }
     #draw.ellipse((20, 20, 180, 180), fill = 'blue', outline = 'blue')
-    draw.ellipse((485, 485, 525, 525), fill = 'blue', outline = 'blue')
+    draw.ellipse(ellipse(position['netCon']), fill = 'blue', outline = 'blue')
     queue = deque()
     nodeList = {'netCon'}
-    position = { 'netCon': (505, 505) }
     angle = { 'netCon' : 0 }
     queue.append('netCon')
-    count = 0
+    count = 1
     for i in connections['netCon']: count = count + 1
-    ang = float(360 / count)
-    p = -1
+    ang = float(180 / count)
+    p = 0
     for i in connections['netCon']:
         p = p + 1
         queue.append(i)
         nodeList.add(i)
-        position[i] = get_point(position['netCon'], 100, p * ang)
+        position[i] = get_point(position['netCon'], 300, p * ang)
+        draw.ellipse(ellipse(position[i]), fill = 'blue', outline = 'blue') 
         angle[i] = p * ang
     while queue:
         curNode = queue.pop()
@@ -50,19 +51,22 @@ def generate_image(connections):
             if i not in nodeList:
                 nodeList.add(i)
                 queue.append(i)
-        count = 0
+        count = 1
         for i in connections[curNode]: count = count + 1
         ang = float(180 / count)
-        p = -1
+        p = 0
         for i in connections[curNode]: 
-            if i in nodeList:
+            if i in position:
                 draw.line([position[i], position[curNode]], fill = 5, width = 5, joint = None)
-            p = p + 1
-            actualangle = p * ang - angle[curNode]
-            if (actualangle < 0): actualangle = actualangle + 360
-            position[i] = get_point(position[curNode], 100, actualangle)
-            angle[i] = actualangle
-            draw.ellipse(ellipse(position[i]), fill = 'blue', outline = 'blue')
-            draw.line([position[i], position[curNode]], fill = 5, width = 5, joint = None)
+            else:
+                p = p + 1
+                actualangle = p * ang - angle[curNode]
+                if (actualangle < 0): actualangle = actualangle + 360
+                position[i] = get_point(position[curNode], 300, actualangle)
+                angle[i] = actualangle
+                draw.ellipse(ellipse(position[i]), fill = 'blue', outline = 'blue')
+                draw.line([position[i], position[curNode]], fill = 5, width = 5, joint = None)
+    font = ImageFont.truetype("arial.ttf", 72)
+    for i in position:
+        draw.text(position[i], i, fill=(31,117,254), font = font)
     return img
-

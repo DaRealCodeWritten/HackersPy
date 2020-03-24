@@ -411,10 +411,10 @@ async def netBuild(ctx):
                 break
             msgContent = (msg.content).split()
             for b in range(0,len(msgContent)):
-                connections[msgContent[i]][curNode] = True
-                connections[curNode][msgContent[i]] = True
-                if msgContent[i] not in nodeList: queue.append(msgContent[i])
-                nodeList.add(msgContent[i])
+                connections[msgContent[b]][curNode] = True
+                connections[curNode][msgContent[b]] = True
+                if msgContent[b] not in nodeList: queue.append(msgContent[b])
+                nodeList.add(msgContent[b])
         connections = dict(connections)
         for i in connections:
             connections[i] = dict(connections[i])
