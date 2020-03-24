@@ -12,7 +12,8 @@ from discord.ext import tasks
 from collections import defaultdict, deque
 from image_gen import generate_image
 from PIL import Image, ImageDraw
-
+import string
+import random
 
 adminlist =[525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
 
@@ -382,7 +383,10 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         bot.load_extension(f'cogs.{filename[:-3]}')
     
-        
+def randomString(stringLength=10):
+    letters = string.ascii_lowercase
+    return ''.join(random.choice(letters) for i in range(stringLength))
+
 @bot.command(description = "in progress", hidden = True)
 async def netBuild(ctx):
     author = ctx.author.id
