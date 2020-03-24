@@ -425,13 +425,11 @@ async def netBuild(ctx):
         print(connections)
         await ctx.author.send(dict(connections))
         im = generate_image(connections)
-        name = randomString(10)
         filedir = os.path.join(os.getcwd(), name + '.jpg')
         im.save(filedir)
         with open(filedir, 'rb') as f:
             await ctx.send(file = discord.File(f))
         os.remove(filedir)
-        await ctx.send('Test')
     except EOFError:
         await ctx.send("idk")
 
