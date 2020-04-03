@@ -15,6 +15,7 @@ from PIL import Image, ImageDraw
 import string
 from io import BytesIO
 import random
+import time
 
 adminlist =[525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
 
@@ -455,6 +456,7 @@ async def botStatusLoop(ctx):
     presencelist = ["Working on Taking Over The World","Competing with Keyboard Cat","Playing Dead","Listening to 2 Servers","Idling but not Idling"]
     for i in range(0, len(presencelist)):
         await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=presencelist[i]))
+        time.sleep(10)
 
 token = os.environ.get('BOT_TOKEN')
 bot.run(token)
