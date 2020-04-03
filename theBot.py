@@ -440,23 +440,27 @@ logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
 handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
 logger.addHandler(handler)        
-            
+
+statusRunning = True
+
+async def botStatusLoop():
+    presencelist = ["Working on Taking Over The World","Competing with Keyboard Cat","Playing Dead","Listening to 2 Servers","Idling but not Idling"]
+    i = -1
+    while statusRunning == True:
+        i = i + 1
+        if (i >= len(presencelist)): i = 0
+        await bot.change_presence(status = activity=discord.Activity(type=discord.ActivityType.playing, name=presencelist[i]))
+        await asyncio.sleep(10)
 
 @bot.command(description = "Changes bot status")
 async def botStatus(ctx, args1):
     if args1 == "Offline":
-        botStatusLoop.stop()
+        statusRunning = False
         await bot.change_presence(status=discord.Status.invisible)
 
     if args1 == "Online":
-        botStatusLoop.start()
-
-@tasks.loop(seconds = 30)
-async def botStatusLoop(ctx):
-    presencelist = ["Working on Taking Over The World","Competing with Keyboard Cat","Playing Dead","Listening to 2 Servers","Idling but not Idling"]
-    for i in range(0, len(presencelist)):
-        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=presencelist[i]))
-        time.sleep(10)
+        statusRunning = False
+        bot.loop.create_task(botStatusLoop())
 
 token = os.environ.get('BOT_TOKEN')
 bot.run(token)
