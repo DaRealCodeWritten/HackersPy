@@ -39,7 +39,7 @@ async def on_ready():
     print("Up and running")
     await logChannel.send('Bot Boottime was passed, Bot Online')
     game = discord.Game('with {} guild(s)'.format(len(bot.guilds)))
-    await bot.change_presence(discord.Status.online)
+    await bot.change_presence(status = discord.Status.online)
 
 @bot.event
 async def on_message(message):
@@ -449,7 +449,7 @@ async def botStatusLoop():
     while statusRunning == True:
         i = i + 1
         if (i >= len(presencelist)): i = 0
-        await bot.change_presence(status = activity=discord.Activity(type=discord.ActivityType.playing, name=presencelist[i]))
+        await bot.change_presence(status = discord.Status.online, activity=discord.Activity(type=discord.ActivityType.playing, name=presencelist[i]))
         await asyncio.sleep(10)
 
 @bot.command(description = "Changes bot status")
