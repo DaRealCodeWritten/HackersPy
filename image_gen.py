@@ -66,7 +66,7 @@ def generate_image(connections):
                 position[i] = get_point(position[curNode], 300, actualangle)
                 angle[i] = actualangle
                 draw.ellipse(ellipse(position[i]), fill = 'blue', outline = 'blue')
-                draw.line([position[i], position[curNode]], fill = 5, width = 5, joint = None)
+                draw.line([position[i], position[curNode]], fill = 5, width = 5, joint   = None)
     font = ImageFont.truetype(os.path.join(os.getcwd(), "arial.ttf"), 72)
     for i in position:
         draw.text(position[i], i, fill=(31,117,254), font = font)
