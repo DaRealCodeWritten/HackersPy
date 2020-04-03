@@ -454,8 +454,7 @@ async def botStatus(ctx, args1):
 async def botStatusLoop(ctx):
     presencelist = ["Working on Taking Over The World","Competing with Keyboard Cat","Playing Dead","Listening to 2 Servers","Idling but not Idling"]
     for i in range(0, len(presencelist)):
-        game = discord.Game(name = presencelist[i])
-        await bot.change_presence(status=discord.Status.online, activity = game)
+        await bot.change_presence(activity=discord.Activity(type=discord.ActivityType.playing, name=presencelist[i]))
 
 token = os.environ.get('BOT_TOKEN')
 bot.run(token)
