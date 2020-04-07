@@ -23,5 +23,28 @@
         "21": 2015 
     },
     "firewallRegeneration": 1,
-    "isAStructure": 1
+    "isAStructure": 1,
+        "imageAdress": {
+                "1": "https://vignette.wikia.nocookie.net/hackersthegame/images/1/14/Sentry_01.png/revision/latest/scale-to-width-down/135?cb=20170401221325",
+                "2": "https://vignette.wikia.nocookie.net/hackersthegame/images/5/5d/Sentry_02-03.png/revision/latest/scale-to-width-down/135?cb=20170401221301",
+                "3": "https://vignette.wikia.nocookie.net/hackersthegame/images/5/5d/Sentry_02-03.png/revision/latest/scale-to-width-down/135?cb=20170401221301",
+                "4": "https://vignette.wikia.nocookie.net/hackersthegame/images/1/18/Sentry_04-05.png/revision/latest/scale-to-width-down/135?cb=20170401221301",
+                "5": "https://vignette.wikia.nocookie.net/hackersthegame/images/1/18/Sentry_04-05.png/revision/latest/scale-to-width-down/135?cb=20170401221301",
+                "6": "https://vignette.wikia.nocookie.net/hackersthegame/images/2/2e/Sentry_06-07.png/revision/latest/scale-to-width-down/135?cb=20170401221300",
+                "7": "https://vignette.wikia.nocookie.net/hackersthegame/images/2/2e/Sentry_06-07.png/revision/latest/scale-to-width-down/135?cb=20170401221300",
+                "8": "https://vignette.wikia.nocookie.net/hackersthegame/images/0/00/Sentry_08-09.png/revision/latest/scale-to-width-down/135?cb=20170401221259",
+                "9": "https://vignette.wikia.nocookie.net/hackersthegame/images/0/00/Sentry_08-09.png/revision/latest/scale-to-width-down/135?cb=20170401221259",
+                "10": "https://vignette.wikia.nocookie.net/hackersthegame/images/c/c9/Sentry_10-12.png/revision/latest/scale-to-width-down/135?cb=20170401221259",
+                "11": "https://vignette.wikia.nocookie.net/hackersthegame/images/c/c9/Sentry_10-12.png/revision/latest/scale-to-width-down/135?cb=20170401221259",
+                "12": "https://vignette.wikia.nocookie.net/hackersthegame/images/c/c9/Sentry_10-12.png/revision/latest/scale-to-width-down/135?cb=20170401221259",
+                "13": "https://vignette.wikia.nocookie.net/hackersthegame/images/6/65/Sentry_13-15.png/revision/latest/scale-to-width-down/135?cb=20170401221258",
+                "14": "https://vignette.wikia.nocookie.net/hackersthegame/images/6/65/Sentry_13-15.png/revision/latest/scale-to-width-down/135?cb=20170401221258",
+                "15": "https://vignette.wikia.nocookie.net/hackersthegame/images/6/65/Sentry_13-15.png/revision/latest/scale-to-width-down/135?cb=20170401221258",
+                "16": "https://vignette.wikia.nocookie.net/hackersthegame/images/9/91/Sentry_16-18.png/revision/latest/scale-to-width-down/135?cb=20170401221257",
+                "17": "https://vignette.wikia.nocookie.net/hackersthegame/images/9/91/Sentry_16-18.png/revision/latest/scale-to-width-down/135?cb=20170401221257",
+                "18": "https://vignette.wikia.nocookie.net/hackersthegame/images/9/91/Sentry_16-18.png/revision/latest/scale-to-width-down/135?cb=20170401221257",
+                "19": "https://vignette.wikia.nocookie.net/hackersthegame/images/8/81/Sentry_19-21.png/revision/latest/scale-to-width-down/135?cb=20170401221257",
+                "20": "https://vignette.wikia.nocookie.net/hackersthegame/images/8/81/Sentry_19-21.png/revision/latest/scale-to-width-down/135?cb=20170401221257",
+                "21": "https://vignette.wikia.nocookie.net/hackersthegame/images/8/81/Sentry_19-21.png/revision/latest/scale-to-width-down/135?cb=20170401221257"
+                }
 }
