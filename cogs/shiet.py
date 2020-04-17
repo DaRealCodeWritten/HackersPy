@@ -1,7 +1,4 @@
-import discord
-import random
 from discord.ext import commands
-import asyncio
 CodeWLogin= 0
 AmethysmLogin= 0
 THKLogin= 0

@@ -11,11 +11,9 @@ import logging
 from discord.ext import tasks
 from collections import defaultdict, deque
 from image_gen import generate_image
-from PIL import Image, ImageDraw
 import string
 from io import BytesIO
 import random
-import time
 
 adminlist =[382534096427024385, 525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
 
@@ -38,7 +36,6 @@ async def on_ready():
     logChannel = bot.get_channel(681216619955224583)
     print("Up and running")
     await logChannel.send('Bot Boottime was passed, Bot Online')
-    game = discord.Game('with {} guild(s)'.format(len(bot.guilds)))
     await bot.change_presence(status = discord.Status.online)
 
 @bot.event
@@ -391,7 +388,6 @@ def randomString(stringLength=10):
 
 @bot.command(description = "in progress", hidden = True)
 async def netBuild(ctx):
-    author = ctx.author.id
     await ctx.send("Network building started in {}'s DM!".format(ctx.author.name))
     try:
         await ctx.author.send('Network building started!')
@@ -399,7 +395,6 @@ async def netBuild(ctx):
         await ctx.send("Hmm, looks like I couldn't DM you. Did you block the bot?")
     connections = nested_dict(2,bool)
     nodeList = {'netCon'}
-    a = 0
     i = 0
     queue = deque()
     queue.append('netCon')
@@ -426,7 +421,6 @@ async def netBuild(ctx):
             connections[i] = dict(connections[i])
         print(connections)
         await ctx.author.send(dict(connections))
-        name = randomString(10)
         im = generate_image(connections)
         with BytesIO() as image_binary:
             im.save(image_binary, 'PNG')
