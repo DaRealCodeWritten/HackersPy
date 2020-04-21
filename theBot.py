@@ -42,17 +42,19 @@ async def on_ready():
 async def on_message(message):
     logChannel = bot.get_channel(691104272066150480)
     messagecontent = message.content
-    currentchannel = bot.get_channel(message.channel.id)
-    if message.guild is None:
-        print(message.author.name + '#' + message.author.discriminator + ": " + message.content)
-    messageLister = messagecontent.split(" ")
-    if message.author == bot.user:
-        return
-    if message.author.bot:
-        return
-    if messageLister[0] == "Alexa":
-        await logChannel.send(f'=========== NEW LOG ===========\nContent of message: {message.content} \nDate and Time in UTC: {str(message.created_at)} \nServer Orgin: {currentchannel.guild.name} channel: {currentchannel.name} \nMessage sender\'s name: ```{message.author.name}#{message.author.discriminator}```\n=========== END LOG ===========')
-    await bot.process_commands(message)
+    pingfilter = "@"
+    if messagecontent.count(pingfilter) == 0: 	
+      currentchannel = bot.get_channel(message.channel.id)
+      if message.guild is None:
+          print(message.author.name + '#' + message.author.discriminator + ": " + message.content)
+      messageLister = messagecontent.split(" ")
+      if message.author == bot.user:
+          return
+      if message.author.bot:
+          return
+      if messageLister[0] == "Alexa":
+          await logChannel.send(f'=========== NEW LOG ===========\nContent of message: {message.content} \nDate and Time in UTC: {str(message.created_at)} \nServer Orgin: {currentchannel.guild.name} channel: {currentchannel.name} \nMessage sender\'s name: ```{message.author.name}#{message.author.discriminator}```\n=========== END LOG ===========')
+      await bot.process_commands(message)
     
 @bot.event
 async def on_command_error(ctx,error):
