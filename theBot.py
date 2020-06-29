@@ -208,7 +208,7 @@ async def prgInf(ctx, program, level):
     b = program.capitalize()
     embed = discord.Embed(title = b + "'s level " + level + "stats:")
     embed.set_thumbnail(url = temp['imageAddress'])
-    embed.add_field(name = "𝐁𝐚𝐬𝐢𝐜 𝐢𝐧𝐟𝐨:", value = 'DPS (damage per second): ' + str(temp['DPS'][int(level)]) + "\nCompilation price: " + str(temp['compilationPrice'][level])
+    embed.add_field(name = "𝐁𝐚𝐬𝐢𝐜 𝐢𝐧𝐟𝐨:", value = 'DPS (damage per second): ' + str(temp['DPS'][level]) + "\nCompilation price: " + str(temp['compilationPrice'][level])
     + "B\n\n")
     embed.add_field(name= "𝐀𝐝𝐝𝐢𝐭𝐢𝐨𝐧𝐚𝐥 𝐢𝐧𝐟𝐨: ", value = 'Compilation time: ' + str(temp['compilationTime']) + "s\nDisk space: " + str(temp['diskSpace'])
     + "\nInstall time: " + str(temp['installTime']) + "s\nHit interval: " + str(temp['hitInterval']) + "s\nProjectile time: " + str(temp['projectileTime'])+'s')
