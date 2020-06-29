@@ -206,12 +206,12 @@ async def prgInf(ctx, program, level):
     with open(f'{program}.json','r') as a:
         temp = json.load(a)
     b = program.capitalize()
-    embed = discord.Embed(title = b + "'s level " + level + "stats:")
+    embed = discord.Embed(title = b + "'s level " + level + " stats:",color = 0x00ff00)
     embed.set_thumbnail(url = temp['imageAddress'])
-    embed.add_field(name = "𝐁𝐚𝐬𝐢𝐜 𝐢𝐧𝐟𝐨:", value = 'DPS (damage per second): ' + str(temp['DPS'][level]) + "\nCompilation price: " + str(temp['compilationPrice'][level])
-    + "B\n\n")
-    embed.add_field(name= "𝐀𝐝𝐝𝐢𝐭𝐢𝐨𝐧𝐚𝐥 𝐢𝐧𝐟𝐨: ", value = 'Compilation time: ' + str(temp['compilationTime']) + "s\nDisk space: " + str(temp['diskSpace'])
-    + "\nInstall time: " + str(temp['installTime']) + "s\nHit interval: " + str(temp['hitInterval']) + "s\nProjectile time: " + str(temp['projectileTime'])+'s')
+    embed.add_field(name = "𝐁𝐚𝐬𝐢𝐜 𝐢𝐧𝐟𝐨:", value = '𝗗𝗣𝗦 (damage per second): ' + str(temp['DPS'][level]) + "\n𝗖𝗼𝗺𝗽𝗶𝗹𝗮𝘁𝗶𝗼𝗻 𝗽𝗿𝗶𝗰𝗲: " + str(temp['compilationPrice'][level])
+    + "B\n\n",inline = False)
+    embed.add_field(name= "𝐀𝐝𝐝𝐢𝐭𝐢𝐨𝐧𝐚𝐥 𝐢𝐧𝐟𝐨: ", value = '𝗖𝗼𝗺𝗽𝗶𝗹𝗮𝘁𝗶𝗼𝗻 𝘁𝗶𝗺𝗲: ' + str(temp['compilationTime']) + "s\n𝗗𝗶𝘀𝗸 𝘀𝗽𝗮𝗰𝗲: " + str(temp['diskSpace'])
+    + "\n𝗜𝗻𝘀𝘁𝗮𝗹𝗹 𝘁𝗶𝗺𝗲: " + str(temp['installTime']) + "s\n𝗛𝗶𝘁 𝗶𝗻𝘁𝗲𝗿𝘃𝗮𝗹: " + str(temp['hitInterval']) + "s\n𝗣𝗿𝗼𝗷𝗲𝗰𝘁𝗶𝗹𝗲 𝘁𝗶𝗺𝗲: " + str(temp['projectileTime'])+'s')
     await ctx.send(embed=embed)
 
 @bot.command(brief='`Alexa playDespacito/reboot`', description="This restarts the bot, which is useful if something goes wrong or the bot freezes. Only a select few people are able to use this command.",aliases=['reboot'])
