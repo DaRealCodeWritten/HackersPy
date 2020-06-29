@@ -18,7 +18,7 @@ import random
 adminlist =[382534096427024385, 525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
 
 #Commands Def
-desc = ("Bot made by molchu, CodeWritten and Amethysm for a game called Hackers to make simple and complex calculations")
+desc = ("Bot made by CodeWritten, THK, Amethysm and Pichu for a game called Hackers to make simple and complex calculations")
 
 def nested_dict(n, type):
     if n == 1:
@@ -42,20 +42,18 @@ async def on_ready():
 async def on_message(message):
     logChannel = bot.get_channel(691104272066150480)
     messagecontent = message.content
-    pingfilter = "@"
-    if messagecontent.count(pingfilter) == 0: 	
-      currentchannel = bot.get_channel(message.channel.id)
-      if message.guild is None:
-          print(message.author.name + '#' + message.author.discriminator + ": " + message.content)
-      messageLister = messagecontent.split(" ")
-      if message.author == bot.user:
-          return
-      if message.author.bot:
-          return
-      if messageLister[0] == "Alexa":
-          await logChannel.send(f'=========== NEW LOG ===========\nContent of message: {message.content} \nDate and Time in UTC: {str(message.created_at)} \nServer Orgin: {currentchannel.guild.name} channel: {currentchannel.name} \nMessage sender\'s name: ```{message.author.name}#{message.author.discriminator}```\n=========== END LOG ===========')
-      await bot.process_commands(message)
-    
+    currentchannel = bot.get_channel(message.channel.id)
+    if message.guild is None:
+        print(message.author.name + '#' + message.author.discriminator + ": " + message.content)
+    messageLister = messagecontent.split(" ")
+    if message.author == bot.user:
+        return
+    if message.author.bot:
+        return
+    if messageLister[0] == "Alexa":
+        await logChannel.send(f'=========== NEW LOG ===========\nContent of message: {message.content} \nDate and Time in UTC: {str(message.created_at)} \nServer Orgin: {currentchannel.guild.name} channel: {currentchannel.name} \nMessage sender\'s name: ```{message.author.name}#{message.author.discriminator}```\n=========== END LOG ===========')
+    await bot.process_commands(message)
+
 @bot.event
 async def on_command_error(ctx,error):
     if error == asyncio.TimeoutError:    
@@ -66,10 +64,6 @@ async def on_command_error(ctx,error):
     else:
         await ctx.send('Oops, an error occured! {}'.format(error))
         print(error)
-    
-@bot.command(aliases = ['o','k','b','oo','m','e','r'], description= 'no shiet', brief = "does nothing", hidden = True)
-async def test(ctx):
-    await ctx.send('ok boomer')
     
 @bot.command(description = "Enables/Disables Status Check Loops, ADMIN ONLY")
 async def statusCheck(ctx, args):
@@ -118,7 +112,6 @@ async def statusChecks():
     embed.add_field (name = "Status: Gateway", value = "Online", inline = False)
     embed.add_field (name = "Status: Bot", value = "Online", inline = False)
     await channel.send(embed=embed)
-    
     
 @bot.command(description="(This shows the help page that you're currently viewing).", brief="`.help [command]`")
 async def help(ctx, *, args=None):
@@ -207,105 +200,19 @@ async def lsStat(ctx, *, args):
         embed.add_field(name = argsList[0].capitalize() + " " + argsList[0].capitalize() + "'s " + argsList[1].capitalize(), value = value, inline = False)
         await ctx.send(embed=embed)
 ##Alexa dpsCalc {program} {level} {amount} {node} {level} 0 (repeat if needed)
-@bot.command(brief = "`Currently dead, use calculate instead`", description="This command calculates the raw DPS of all programs. This does not account for projectile travel time and therefore assumes every program has a hit interval of 1 second, and damage is also calculated for 1 second, so the number might be ever so off. This uses the same syntax as projCalc, which you will find below. typeProgramAndNodeNamesLikeThisPlease")
-async def dpsCalc(ctx, *, args):
-    argsList = args.split(" ")
-    i = 0
-    argsName = []
-    argsLevel = []
-    argsAmount = []
-    while i < len(argsList):
-        argsName.append(argsList[i])
-        i = i+3
-    i = 1
-    while i < len(argsList):
-        argsLevel.append(argsList[i])
-        i = i+3
-    i = 2
-    while i < len(argsList):
-        argsAmount.append(argsList[i])
-        i = i+3
-    argsTuple = zip(argsName, argsLevel, argsAmount)
-    dpsamount = 0.0
-    boiii = 0.0
-    anotherTempValueYetAgain = 0.0
-    for x, y, z in argsTuple:
-        with open("{}.json".format(x), "r") as f:
-            temp1 = json.load(f)
-            if temp1["isAStructure"] == 0:
-                boii = temp1["DPS"]
-                dpsamount = dpsamount + float(boii[str(y)])*float(z)
-                #i have no idea how to fix install time so for now it will stay bugged to shit
-                ohGodPleaseStop = boiii-float(temp1["installTime"])
-                if float(temp1["DPS"])*ohGodPleaseStop > anotherTempValueYetAgain*ohGodPleaseStop:
-                    boiii = float(temp1["installTime"])
-                    anotherTempValueYetAgain = float(temp1["DPS"])
-                elif boiii == 0:
-                    boiii = float(temp1["installTime"])
-                boii = temp1["firewall"]
-                boiii = boiii + (float(boii[str(y)]) / float(dpsamount))
-                dpsamount = 0.0
-##    embed=discord.Embed(color=0x00ff00)
-##    embed.add_field(name="Calculation Complete!",value="It took {} seconds to hack the base.".format(boiii))
-    await ctx.send("It took {} seconds to hack the base.".format(boiii))
-    
-@bot.command(brief = '`Alexa projCalc {program} {level} {amount} {node} {level} 0 (repeat)`',description="This command calculates time based on projectile firing intervals and install times of the programs. This command assumes that projectiles are instant hitting and doesn't take into account the time it takes for a projectile to reach the target. The syntax is as follows: command <programName> <level> <amountOfProgram> <nodeName> <level> <putARandomNumberHere>. The bot will stack all of the program damage prior to the node entering and then will calculate all of the collected dps against the node it finds, reset the dps and then start calculating again. So, you can port the whole base into text and the bot will calculate it. typeProgramAndNodeNamesLikeThisPlease")
-async def projCalc(ctx, *, args):
-    argsList = args.split(" ")
-    i = 0
-    argsName = []
-    argsLevel = []
-    argsAmount = []
-    while i < len(argsList):
-        argsName.append(argsList[i])
-        i = i+3
-    i = 1
-    while i < len(argsList):
-        argsLevel.append(argsList[i])
-        i = i+3
-    i = 2
-    while i < len(argsList):
-        argsAmount.append(argsList[i])
-        i = i+3
-    argsTuple = zip(argsName, argsLevel, argsAmount)
-    projamount = 0.0
-    pleaseend = 0.0
-    mysuffering = 0.0
-    weDontHaveTime = 0.0
-    temporaryvalue = 0
-    for x, y, z in argsTuple:
-        if x == "beamCannon":
-            await ctx.send("beams aren't projectile so the whole command intentionally crashed")
-            break
-        with open("{}.json".format(x), "r") as f:
-            temp1 = json.load(f)
-            if temp1["isAStructure"] == 0:
-                temp2 = temp1["DPS"]
-                temp3 = temp1["installTime"]
-                temp4 = temp1["hitInterval"]
-                if mysuffering < temp4:
-                    mysuffering = temp4
-                if pleaseend < temp3:
-                    pleaseend = temp3
-                projamount = projamount + float(temp2[str(y)])*float(z)
-                temporaryvalue = 0
-            else:
-                temp2 = temp1["firewall"]
-                structureFirewall = temp2[str(y)]
-                floatedStructureFirewall = float(structureFirewall)
-                while floatedStructureFirewall > 0.0:
-                    if projamount <= 0:
-                        await ctx.send("you can't have negative programs so good job crashing the whole command")
-                        break
-                    if temporaryvalue == 1:
-                        weDontHaveTime = weDontHaveTime + mysuffering
-                    floatedStructureFirewall = floatedStructureFirewall - projamount
-                    temporaryvalue = 1
-                weDontHaveTime = weDontHaveTime + pleaseend
-    embed=discord.Embed(color=0x00ff00)
-    embed.add_field(name="Calculation Complete!",value="It took {} seconds to hack the base.".format(weDontHaveTime))
-    await ctx.send("It took {} seconds to hack the base.".format(weDontHaveTime))
-    
+
+@bot.command(brief='Alexa progInfo/programInfo/prgInf [program] [level] ',description='test',aliases=['progInfo','programInfo'])
+async def prgInf(ctx, program, level):
+    with open(f'{program}.json','r') as a:
+        temp = json.load(a)
+    embed = discord.Embed(title = str(program).capitalize + "'s level " + level + "stats:")
+    embed.set_thumbnail(url = temp['imageAddress'])
+    embed.add_field(name = "𝐁𝐚𝐬𝐢𝐜 𝐢𝐧𝐟𝐨:", value = 'DPS (damage per second): ' + str(temp['DPS'][int(level)]) + "\nCompilation price: " + str(temp['compilationPrice'][level])
+    + "B\n\n")
+    embed.add_field(name= "𝐀𝐝𝐝𝐢𝐭𝐢𝐨𝐧𝐚𝐥 𝐢𝐧𝐟𝐨: ", value = 'Compilation time: ' + str(temp['compilationTime']) + "s\nDisk space: " + str(temp['diskSpace'])
+    + "\nInstall time: " + str(temp['installTime']) + "s\nHit interval: " + str(temp['hitInterval']) + "s\nProjectile time: " + str(temp['projectileTime'] + 's'))
+    await ctx.send(embed=embed)
+
 @bot.command(brief='`Alexa playDespacito/reboot`', description="This restarts the bot, which is useful if something goes wrong or the bot freezes. Only a select few people are able to use this command.",aliases=['reboot'])
 async def playDespacito(ctx):
     if ctx.author.id in (382534096427024385, 525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952):
