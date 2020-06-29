@@ -210,7 +210,7 @@ async def prgInf(ctx, program, level):
     embed.add_field(name = "𝐁𝐚𝐬𝐢𝐜 𝐢𝐧𝐟𝐨:", value = 'DPS (damage per second): ' + str(temp['DPS'][int(level)]) + "\nCompilation price: " + str(temp['compilationPrice'][level])
     + "B\n\n")
     embed.add_field(name= "𝐀𝐝𝐝𝐢𝐭𝐢𝐨𝐧𝐚𝐥 𝐢𝐧𝐟𝐨: ", value = 'Compilation time: ' + str(temp['compilationTime']) + "s\nDisk space: " + str(temp['diskSpace'])
-    + "\nInstall time: " + str(temp['installTime']) + "s\nHit interval: " + str(temp['hitInterval']) + "s\nProjectile time: " + str(temp['projectileTime'] + 's'))
+    + "\nInstall time: " + str(temp['installTime']) + "s\nHit interval: " + str(temp['hitInterval']) + "s\nProjectile time: " + str(temp['projectileTime'])+'s')
     await ctx.send(embed=embed)
 
 @bot.command(brief='`Alexa playDespacito/reboot`', description="This restarts the bot, which is useful if something goes wrong or the bot freezes. Only a select few people are able to use this command.",aliases=['reboot'])
