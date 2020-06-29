@@ -205,7 +205,8 @@ async def lsStat(ctx, *, args):
 async def prgInf(ctx, program, level):
     with open(f'{program}.json','r') as a:
         temp = json.load(a)
-    embed = discord.Embed(title = str(program).capitalize() + "'s level " + level + "stats:")
+    b = program.capitalize()
+    embed = discord.Embed(title = b + "'s level " + level + "stats:")
     embed.set_thumbnail(url = temp['imageAddress'])
     embed.add_field(name = "𝐁𝐚𝐬𝐢𝐜 𝐢𝐧𝐟𝐨:", value = 'DPS (damage per second): ' + str(temp['DPS'][int(level)]) + "\nCompilation price: " + str(temp['compilationPrice'][level])
     + "B\n\n")
