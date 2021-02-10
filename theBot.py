@@ -14,11 +14,12 @@ from image_gen import generate_image
 import string
 from io import BytesIO
 import random
+import json
 
-adminlist =[382534096427024385, 525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952]
+adminlist = json.loads(open("adminIDs.json", r).read())
 
 #Commands Def
-desc = ("Bot made by CodeWritten, THK, Amethysm and Pichu for a game called Hackers to make simple and complex calculations")
+desc = ("Bot made by CodeWritten, THK, Amethysm and Pichu for a game called Hackers to make simple and complex calculations.")
 
 def nested_dict(n, type):
     if n == 1:
@@ -67,21 +68,21 @@ async def on_command_error(ctx,error):
     
 @bot.command(description = "Enables/Disables Status Check Loops, ADMIN ONLY")
 async def statusCheck(ctx, args):
-    if args == "True" and ctx.author.id in (382534096427024385, 525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952):
+    if args == "True" and ctx.author.id in adminList:
         embed = discord.Embed(color=0x00ff00)
         embed.add_field(name = "Started Bot Status Update Task Loop", value = "Set Successfully", inline= False)
         embed.set_footer(text= f"Requested by {ctx.author.display_name + '#' + ctx.author.discriminator}", icon_url= ctx.author.avatar_url)
         await ctx.send (embed=embed)
         statusChecks.start()
         
-    elif args == "False" and ctx.author.id in (382534096427024385, 525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952):
+    elif args == "False" and ctx.author.id in adminList:
         embed = discord.Embed(color=0x00ff00)
         embed.add_field(name = "Stopped Bot Status Update Task Loop", value = "Set Successfully", inline= False)
         embed.set_footer(text= f"Requested by {ctx.author.display_name + '#' + ctx.author.discriminator}", icon_url=ctx.author.avatar_url)
         await ctx.send(embed=embed)
         statusChecks.stop()
         
-    elif args == "Send" and ctx.author.id in (382534096427024385, 525334420467744768, 436646726204653589, 218142353674731520, 218590885703581699, 212700961674756096, 355286125616562177, 270932660950401024, 393250142993645568, 210939566733918208, 419742289188093952):
+    elif args == "Send" and ctx.author.id in adminList:
         channel = bot.get_channel(664250913376043049)
         currentDate= datetime.datetime.now()
         embed= discord.Embed(color = 0x00ff00)
